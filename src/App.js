@@ -16,11 +16,6 @@ class App extends Component{
   componentDidMount(){
     this.getMovies();  
   }
-  componentDidMount(){
-    setTimeout(()=>{
-      this.setState({isLoading : false })
-    }, 5000)
-  }
   render(){
     const {isLoading}= this.state;
     return <div>
