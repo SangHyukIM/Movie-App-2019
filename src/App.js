@@ -1,4 +1,5 @@
- import PropTypes from "prop-types"; 
+import PropTypes from "prop-types"; 
+import axios from "axios";
 import { Component } from "react";
  // 터미널 npm i porp-types 설치 후
  // propType 호출 
@@ -6,31 +7,24 @@ import { Component } from "react";
 
 class App extends Component{
   state = {
-    count: 0
+     isLoading:true,
+     movies:[]
   }
-  add = () =>{
-    this.setState(current => ({count: current.count + 1 }));
-  };
-  minus = () =>{
-    this.setState(current => ({count: current.count - 1 }));
-  };
+  getMovies = async () => {
+    const movies = await axios.get("https://yts-proxy.now.sh/list_movies.json");
+  }
   componentDidMount(){
-    console.log("component rendered")
+    this.getMovies();  
   }
-  componentDidUpdate(){ 
-    console.log("I just Update")
-  }
-  componentWillUnmount(){
-    console.log("Goodbye, Cruel World")
+  componentDidMount(){
+    setTimeout(()=>{
+      this.setState({isLoading : false })
+    }, 5000)
   }
   render(){
-    console.log("I'm rendered")
+    const {isLoading}= this.state;
     return <div>
-      <h1>
-      The number is: {this.state.count}
-      </h1>
-      <button onClick={this.add}>Add</button>
-      <button onClick={this.minus}>Minus</button>
+    {this.state.isLoading ? "Loading":"We are ready"}
     </div>
   }
 }
