@@ -1,8 +1,8 @@
+import { Component } from "react";
 import PropTypes from "prop-types"; 
 import axios from "axios";
-import { Component } from "react";
- // 터미널 npm i porp-types 설치 후
- // propType 호출 
+import Movie from "./Movie";
+import "./App.css"
 
 
 class App extends Component{
@@ -11,16 +11,38 @@ class App extends Component{
      movies:[]
   }
   getMovies = async () => {
-    const movies = await axios.get("https://yts-proxy.now.sh/list_movies.json");
+    const {data:{data:{movies}}} = await axios.get("https://yts-proxy.now.sh/list_movies.json");
+    this.setState({movies, isLoading : false})
+    console.log(movies)
   }
   componentDidMount(){
     this.getMovies();  
   }
   render(){
-    const {isLoading}= this.state;
-    return <div>
-    {this.state.isLoading ? "Loading":"We are ready"}
+    const {isLoading, movies}= this.state;
+    return (
+    <section className="container">
+    {this.state.isLoading ? (
+      <div className="loader">
+      <span className="loader_text">Loading</span>
     </div>
+    ) :(
+      <div className="movies">
+        {movies.map(movie =>(
+          <Movie
+          key = {movie.id}
+          id = {movie.id}
+          year = {movie.year}
+          title = {movie.title}
+          summary = {movie.summary}
+          poster = {movie.medium_cover_image}
+          genres = {movie.genres}
+          />
+          ))}
+      </div>
+    )}
+    </section>
+    )
   }
 }
 
