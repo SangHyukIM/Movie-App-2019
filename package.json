@@ -1,5 +1,5 @@
 {
-  "name": "Movie_App_2019",
+  "name": "Movie-App-2019",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,6 +11,7 @@
     "porp-types": "0.0.1-security",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },
@@ -38,5 +39,5 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://sanghyukim.github.io/movie_app_2019/"
+  "homepage": "https://SangHyukIM.github.io/Movie-App-2019/"
 }
